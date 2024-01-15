@@ -1,5 +1,6 @@
 import { TypeMovie } from "@/libs/enums/index";
 import { Movies, Show } from "@/libs/dto/index";
+import dynamicBlurDataUrl from "@/utils/dynamicBlurDataUrl";
 
 const getMovies = async (): Promise<Movies[]> => {
   const res = await fetch(`${process.env.API_URL}/search/shows?q=girls`, {
@@ -11,7 +12,18 @@ const getMovies = async (): Promise<Movies[]> => {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
+
+  return await Promise.all(
+    (
+      await res.json()
+    ).map(async (data: Movies) => ({
+      ...data,
+      show: {
+        ...data.show,
+        imageHash: await dynamicBlurDataUrl(data.show.image?.original ?? ""),
+      },
+    }))
+  );
 };
 
 const getDetailMovie = async (key: string): Promise<Show> => {
