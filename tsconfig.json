@@ -24,7 +24,8 @@
       "@/service/*": ["./src/service/*"],
       "@/components/*": ["./src/components/*"],
       "@/libs/dto/*": ["./src/libs/dto/*"],
-      "@/libs/enums/*": ["./src/libs/enums/*"]
+      "@/libs/enums/*": ["./src/libs/enums/*"],
+      "@/utils/*": ["./src/utils/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
