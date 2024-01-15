@@ -4,7 +4,6 @@ import { getMovies } from "@/service/index";
 import Container from "@/components/Container";
 import { TypeMovie } from "@/libs/enums/index";
 import ImageCover from "@/components/ImageCover";
-import { motion } from "framer-motion";
 import { MotionDiv } from "./framer";
 
 export default async function Home() {
