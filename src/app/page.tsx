@@ -1,12 +1,26 @@
 import Link from "next/link";
-import Image from "next/image";
 import Star from "@/icons/Star";
 import { getMovies } from "@/service/index";
 import Container from "@/components/Container";
 import { TypeMovie } from "@/libs/enums/index";
+import ImageCover from "@/components/ImageCover";
+import { motion } from "framer-motion";
+import { MotionDiv } from "./framer";
 
 export default async function Home() {
   const movies = await getMovies();
+
+  const cardVariants = {
+    offScreen: {
+      y: 40,
+    },
+    onScreen: {
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
 
   return (
     <main>
@@ -27,36 +41,44 @@ export default async function Home() {
         </h2>
         <div className="grid grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 gap-6 mt-6">
           {movies.map((movie) => (
-            <Link
+            <MotionDiv
               key={movie?.show?.id}
-              href={`/${
-                movie?.show?.externals?.imdb ?? movie?.show?.externals?.thetvdb
-              }-${
-                movie.show.externals.imdb ? TypeMovie.IMDB : TypeMovie.THETVDB
-              }`}
+              variants={cardVariants}
+              initial="offScreen"
+              whileInView="onScreen"
+              viewport={{ once: true }}
               style={{ background: "rgb(77 80 91 / 20%)" }}
               className="rounded-xl backdrop-blur-[40px] px-2 pt-2 pb-4 relative cursor-pointer"
             >
-              <div
-                style={{ background: "rgba(0, 0, 0, 0.65)" }}
-                className="absolute top-[18px] left-4 backdrop-blur-[40px] rounded-lg p-2 flex gap-1 items-center z-10"
+              <Link
+                href={`/${
+                  movie?.show?.externals?.imdb ?? movie?.show?.externals?.thetvdb
+                }-${
+                  movie.show.externals.imdb ? TypeMovie.IMDB : TypeMovie.THETVDB
+                }`}
               >
-                <Star />
-                <p className="text-[#FFAD49] text-base">
-                  {movie?.show?.rating?.average?.toFixed(1) ?? "??"}
-                </p>
-              </div>
-              <div className="w-full aspect-[1/1.7] xl:aspect-[1/1.6] rounded-lg relative overflow-hidden">
-                <Image
-                  src={movie?.show?.image?.original ?? ""}
-                  alt="banner image"
-                  fill
-                />
-              </div>
-              <h3 className="mt-4 text-[#EBEEF5] text-base font-semibold">
-                {movie?.show?.name}
-              </h3>
-            </Link>
+                <div
+                  style={{ background: "rgba(0, 0, 0, 0.65)" }}
+                  className="absolute top-[18px] left-4 backdrop-blur-[40px] rounded-lg p-2 flex gap-1 items-center z-10"
+                >
+                  <Star />
+                  <p className="text-[#FFAD49] text-base">
+                    {movie?.show?.rating?.average?.toFixed(1) ?? "??"}
+                  </p>
+                </div>
+                <div className="w-full aspect-[1/1.7] xl:aspect-[1/1.6] rounded-lg relative overflow-hidden">
+                  <ImageCover
+                    url={movie?.show?.image?.original ?? ""}
+                    alt={`${movie?.show?.name} image`}
+                    imageHash={movie.show.imageHash}
+                  />
+                </div>
+                <h3 className="mt-4 text-[#EBEEF5] text-base font-semibold">
+                  {movie?.show?.name}
+                </h3>
+              </Link>
+
+            </MotionDiv>
           ))}
         </div>
       </Container>
