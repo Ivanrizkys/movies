@@ -26,6 +26,7 @@ export interface Show {
   dvdCountry: null;
   externals: Externals;
   image: Image | null;
+  imageHash: string
   summary: null | string;
   updated: number;
   _links: Links;
