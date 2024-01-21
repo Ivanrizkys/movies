@@ -47,7 +47,7 @@ export default async function Home() {
               whileInView="onScreen"
               viewport={{ once: true }}
               style={{ background: "rgb(77 80 91 / 20%)" }}
-              className="rounded-xl backdrop-blur-[40px] px-2 pt-2 pb-4 relative cursor-pointer"
+              className="rounded-xl backdrop-blur-[40px] px-2 pt-2 pb-4 relative cursor-pointer transform-gpu"
             >
               <Link
                 href={`/${

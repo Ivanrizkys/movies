@@ -36,15 +36,15 @@ const ListContent = () => {
 
   const cardVariants = {
     offScreen: {
-      y: 40
+      y: 40,
     },
     onScreen: {
       y: 0,
       transition: {
-        duration: 0.5
-      }
-    }
-  }
+        duration: 0.5,
+      },
+    },
+  };
 
   const modalVariants = {
     open: {
@@ -111,7 +111,7 @@ const ListContent = () => {
                   whileInView="onScreen"
                   viewport={{ once: true }}
                   style={{ background: "rgb(77 80 91 / 20%)" }}
-                  className="rounded-xl backdrop-blur-[40px] px-2 pt-2 pb-4 relative"
+                  className="rounded-xl backdrop-blur-[40px] transform-gpu px-2 pt-2 pb-4 relative"
                 >
                   <div
                     style={{ background: "rgba(0, 0, 0, 0.65)" }}
