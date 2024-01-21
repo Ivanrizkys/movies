@@ -39,7 +39,7 @@ export default async function Home() {
           All <span className="text-base">{movies ? movies.length : "0"}</span>
         </h2>
         <div className="grid grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 gap-6 mt-6">
-          {movies.map((movie) => (
+          {movies.map((movie, index) => (
             <MotionDiv
               key={movie?.show?.id}
               variants={cardVariants}
@@ -69,6 +69,7 @@ export default async function Home() {
                   <ImageCover
                     url={movie?.show?.image?.original ?? ""}
                     alt={`${movie?.show?.name} image`}
+                    priority={index <= 3}
                     imageHash={movie.show.imageHash}
                   />
                 </div>

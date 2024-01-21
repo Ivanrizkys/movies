@@ -103,7 +103,7 @@ const ListContent = () => {
         {!isLoading || !isValidating ? (
           <div className="grid grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 gap-6 mt-6">
             {data &&
-              data.map((movie) => (
+              data.map((movie, index) => (
                 <motion.div
                   key={movie?.show?.id}
                   variants={cardVariants}
@@ -124,6 +124,7 @@ const ListContent = () => {
                   </div>
                   <div className="w-full aspect-[1/1.7] xl:aspect-[1/1.6] rounded-lg relative overflow-hidden">
                     <ImageCover
+                      priority={index <= 3}
                       url={movie?.show?.image?.original ?? ""}
                       alt={`${movie?.show?.name} image`}
                       imageHash={movie.show.imageHash}
