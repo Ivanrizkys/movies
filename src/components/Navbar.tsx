@@ -15,7 +15,9 @@ const Navbar = () => {
           className="text-[#A8AEBF] font-semibold text-base flex items-center gap-2"
         >
           <span>Suggest me</span>
-          <Arrow />
+          <div className="animate-bounce-right">
+            <Arrow />
+          </div>
         </Link>
       </Container>
     </nav>

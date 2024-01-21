@@ -58,6 +58,21 @@ const config: Config = {
       borderWidth: {
         "1": "1px",
       },
+      keyframes: {
+        "bounce-right": {
+          "0%, 100%": {
+            transform: "translateX(25%)",
+            "animation-timing-function": "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "50%": {
+            transform: "translateY(0)",
+            "animation-timing-function": "cubic-bezier(0, 0, 0.2, 1)",
+          },
+        },
+      },
+      animation: {
+        "bounce-right": "bounce-right 1s infinite",
+      },
     },
   },
   plugins: [],
