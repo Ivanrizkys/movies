@@ -7,9 +7,10 @@ interface ImageCoverProps {
   url: string;
   alt: string;
   imageHash: string;
+  priority: boolean;
 }
 
-const ImageCover = ({ url, alt, imageHash }: ImageCoverProps) => {
+const ImageCover = ({ url, alt, imageHash, priority }: ImageCoverProps) => {
   const [error, setError] = useState<boolean>(false);
 
   return (
@@ -20,6 +21,7 @@ const ImageCover = ({ url, alt, imageHash }: ImageCoverProps) => {
           alt={alt}
           fill
           placeholder="blur"
+          priority={priority}
           blurDataURL={imageHash}
           onError={() => setError(true)}
         />
