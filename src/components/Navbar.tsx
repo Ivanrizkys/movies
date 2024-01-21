@@ -10,7 +10,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-0 w-full z-10 bg-[#121829]/50 backdrop-blur-lg transform-gpu">
+    <nav className="fixed top-0 w-full z-10 bg-grey-900/50 backdrop-blur-lg transform-gpu">
       <Container className="flex justify-between items-center py-4">
         <Link href={"/"}>
           <Image src={"/logo.png"} width={28} height={28} alt="app-logo" />

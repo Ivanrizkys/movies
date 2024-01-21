@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`min-h-screen bg-[#121829] bg-repeat bg-default bg-[length:100%_auto] font-poppins selection:bg-grey-50 selection:text-black pb-9 ${poppins.className}`}
+        className={`min-h-screen bg-grey-900 bg-repeat bg-default bg-[length:100%_auto] font-poppins selection:bg-grey-50 selection:text-black pb-9 ${poppins.className}`}
       >
         <Navbar />
         {children}

@@ -110,15 +110,13 @@ const ListContent = () => {
                   initial="offScreen"
                   whileInView="onScreen"
                   viewport={{ once: true }}
-                  style={{ background: "rgb(77 80 91 / 20%)" }}
-                  className="rounded-xl backdrop-blur-[40px] transform-gpu px-2 pt-2 pb-4 relative"
+                  className="rounded-xl backdrop-blur-2xl bg-card/20 transform-gpu px-2 pt-2 pb-4 relative"
                 >
                   <div
-                    style={{ background: "rgba(0, 0, 0, 0.65)" }}
-                    className="absolute top-[18px] left-4 backdrop-blur-[40px] rounded-lg p-2 flex gap-1 items-center z-10"
+                    className="absolute top-[18px] left-4 backdrop-blur-2xl bg-black/65 rounded-lg p-2 flex gap-1 items-center z-10"
                   >
                     <Star />
-                    <p className="text-[#FFAD49] text-base">
+                    <p className="text-warning-500 text-base">
                       {movie?.show?.rating?.average?.toFixed(1) ?? "??"}
                     </p>
                   </div>
@@ -130,7 +128,7 @@ const ListContent = () => {
                       imageHash={movie.show.imageHash}
                     />
                   </div>
-                  <h3 className="mt-4 text-[#EBEEF5] text-base font-semibold">
+                  <h3 className="mt-4 text-grey-50 text-base font-semibold">
                     {movie?.show?.name}
                   </h3>
                   <button
@@ -150,11 +148,11 @@ const ListContent = () => {
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((val) => (
               <div
                 key={val}
-                className="rounded-xl bg-grey-900 backdrop-blur-[40px] px-2 pt-2 pb-4 relative cursor-pointer"
+                className="rounded-xl bg-grey-900 backdrop-blur-2xl px-2 pt-2 pb-4 relative cursor-pointer"
               >
-                <div className="bg-black/20 w-16 h-6 absolute top-[18px] left-4 backdrop-blur-[40px] rounded-lg p-2 flex gap-1 items-center z-10"></div>
+                <div className="bg-black/20 w-16 h-6 absolute top-[18px] left-4 backdrop-blur-2xl rounded-lg p-2 flex gap-1 items-center z-10"></div>
                 <div className="w-full aspect-[1/1.7] xl:aspect-[1/1.6] rounded-lg relative overflow-hidden bg-grey-800 animate-pulse"></div>
-                <div className="mt-4 w-full max-w-[150px] h-4  bg-grey-800 rounded-lg animate-pulse"></div>
+                <div className="mt-4 w-full max-w-[150px] h-4 bg-grey-800 rounded-lg animate-pulse"></div>
                 <div className="flex items-center w-full gap-x-2 mt-6">
                   <div className="w-4 h-4 rounded-full bg-grey-800 animate-pulse"></div>
                   <div className="w-full max-w-[150px] h-4 rounded-full bg-grey-800 animate-pulse"></div>
