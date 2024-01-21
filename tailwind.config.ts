@@ -52,6 +52,7 @@ const config: Config = {
         "warning-700": "#99682C",
         "warning-800": "#66451D",
         "warning-900": "#33230F",
+        "card": "#4D505B"
       },
       borderWidth: {
         "1": "1px",
