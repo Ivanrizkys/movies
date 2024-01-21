@@ -1,8 +1,9 @@
 interface ArrowProps {
   className?: string;
+  stroke: string;
 }
 
-const Arrow = ({ className }: ArrowProps) => {
+const Arrow = ({ className, stroke }: ArrowProps) => {
   return (
     <svg
       className={className}
@@ -14,7 +15,7 @@ const Arrow = ({ className }: ArrowProps) => {
     >
       <path
         d="M9.61987 3.95331L13.6665 7.99997L9.61987 12.0466"
-        stroke="#A8AEBF"
+        stroke={stroke}
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -22,7 +23,7 @@ const Arrow = ({ className }: ArrowProps) => {
       />
       <path
         d="M2.33325 8H13.5533"
-        stroke="#A8AEBF"
+        stroke={stroke}
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
