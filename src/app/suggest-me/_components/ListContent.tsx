@@ -12,7 +12,7 @@ import CardMovieLoader from "@/components/CardMovie/client/loader";
 const ListContent = () => {
   const [search, setSearch] = useState<string>("hero");
   const [showModal, setShowModal] = useState<boolean>(false);
-  
+
   const { data, isLoading, isValidating } = useSearchMovies(search);
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
@@ -39,7 +39,7 @@ const ListContent = () => {
         </div>
         <button
           type="submit"
-          className="text-white text-base rounded-xl bg-primary-400 py-4 px-8 hover:bg-primary-500 active:bg-primary-600"
+          className="text-white text-base rounded-xl bg-primary-400 py-4 px-8 hover:bg-primary-500 active:bg-primary-600 hidden  min-[500px]:block"
         >
           Search
         </button>
