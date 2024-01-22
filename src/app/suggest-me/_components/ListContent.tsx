@@ -1,21 +1,18 @@
 "use client";
 
-import Close from "@/icons/Close";
-import Hearts from "@/icons/Hearts";
 import Search from "@/icons/Search";
-import Star from "@/icons/Star";
-import Thumb from "@/icons/Thumb";
-import { motion } from "framer-motion";
 import { Movies } from "@/libs/dto/index";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import useSWR, { Fetcher } from "swr";
-import ImageCover from "@/components/ImageCover";
 import dynamicBlurDataUrl from "@/utils/dynamicBlurDataUrl";
+import Modal from "@/components/Modal";
+import CardMovie from "@/components/CardMovie/client";
+import CardMovieLoader from "@/components/CardMovie/client/loader";
 
 const ListContent = () => {
   const [search, setSearch] = useState<string>("hero");
   const [showModal, setShowModal] = useState<boolean>(false);
-
+  
   const { data, isLoading, isValidating } = useSearchMovies(search);
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
@@ -23,57 +20,6 @@ const ListContent = () => {
     if (((e.target as any).search.value as string) === "")
       return setSearch("hero");
     setSearch((e.target as any).search.value as string);
-  };
-
-  useEffect(() => {
-    if (showModal) {
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [showModal]);
-
-  const cardVariants = {
-    offScreen: {
-      y: 40,
-    },
-    onScreen: {
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  const modalVariants = {
-    open: {
-      scale: 1,
-    },
-    closed: {
-      scale: 0,
-    },
-    initial: {
-      scale: 0,
-    },
-  };
-
-  const backdropVariants = {
-    open: {
-      display: "flex",
-      backdropFilter: "blur(4px)",
-      backgroundColor: "rgb(0 0 0 / 0.4)",
-    },
-    closed: {
-      display: "none",
-      backdropFilter: "blur(0)",
-      backgroundColor: "transparent",
-    },
-    initial: {
-      display: "none",
-      backdropFilter: "blur(0)",
-      backgroundColor: "transparent",
-    },
   };
 
   return (
@@ -104,94 +50,27 @@ const ListContent = () => {
           <div className="grid grid-cols-2 min-[500px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 mt-6">
             {data &&
               data.map((movie, index) => (
-                <motion.div
-                  key={movie?.show?.id}
-                  variants={cardVariants}
-                  initial="offScreen"
-                  whileInView="onScreen"
-                  viewport={{ once: true }}
-                  className="rounded-xl backdrop-blur-2xl bg-card/20 transform-gpu px-2 pt-2 pb-4 relative"
-                >
-                  <div
-                    className="absolute top-[18px] left-4 backdrop-blur-2xl bg-black/65 rounded-lg p-2 flex gap-1 items-center z-10"
-                  >
-                    <Star />
-                    <p className="text-warning-500 text-base">
-                      {movie?.show?.rating?.average?.toFixed(1) ?? "??"}
-                    </p>
-                  </div>
-                  <div className="w-full aspect-[1/1.7] xl:aspect-[1/1.6] rounded-lg relative overflow-hidden">
-                    <ImageCover
-                      priority={index <= 3}
-                      url={movie?.show?.image?.original ?? ""}
-                      alt={`${movie?.show?.name} image`}
-                      imageHash={movie.show.imageHash}
-                    />
-                  </div>
-                  <h3 className="mt-4 text-grey-50 text-base font-semibold">
-                    {movie?.show?.name}
-                  </h3>
-                  <button
-                    onClick={() => setShowModal(true)}
-                    className="flex items-center gap-x-2 mt-4"
-                  >
-                    <Thumb />
-                    <p className="text-base font-semibold text-primary-400">
-                      Suggest this
-                    </p>
-                  </button>
-                </motion.div>
+                <CardMovie
+                  key={movie.show.id}
+                  index={index}
+                  title={movie.show.name}
+                  rating={movie.show.rating.average}
+                  imageUrl={movie.show.image ? movie.show.image.original : ""}
+                  imageHash={movie.show.imageHash}
+                  setShowModal={setShowModal}
+                />
               ))}
           </div>
         ) : (
           <div className="grid grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 gap-6 mt-6">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((val) => (
-              <div
-                key={val}
-                className="rounded-xl bg-grey-900 backdrop-blur-2xl px-2 pt-2 pb-4 relative cursor-pointer"
-              >
-                <div className="bg-black/20 w-16 h-6 absolute top-[18px] left-4 backdrop-blur-2xl rounded-lg p-2 flex gap-1 items-center z-10"></div>
-                <div className="w-full aspect-[1/1.7] xl:aspect-[1/1.6] rounded-lg relative overflow-hidden bg-grey-800 animate-pulse"></div>
-                <div className="mt-4 w-full max-w-[150px] h-4 bg-grey-800 rounded-lg animate-pulse"></div>
-                <div className="flex items-center w-full gap-x-2 mt-6">
-                  <div className="w-4 h-4 rounded-full bg-grey-800 animate-pulse"></div>
-                  <div className="w-full max-w-[150px] h-4 rounded-full bg-grey-800 animate-pulse"></div>
-                </div>
-              </div>
+              <CardMovieLoader key={val} />
             ))}
           </div>
         )}
       </div>
 
-      <motion.div
-        variants={backdropVariants}
-        initial="initial"
-        animate={showModal ? "open" : "closed"}
-        className="fixed top-0 left-0 w-full h-screen justify-center items-center"
-      >
-        <motion.div
-          variants={modalVariants}
-          animate={showModal ? "open" : "closed"}
-          initial="initial"
-          transition={{ type: "spring", duration: 0.3, bounce: 0.3 }}
-          className="bg-[#121829cc] border-1 border-solid border-grey-800 rounded-3xl backdrop-blur-xl w-full max-w-[560px] flex flex-col items-center gap-y-6 p-20 relative"
-        >
-          <button
-            onClick={() => setShowModal(false)}
-            className="rounded-lg bg-black/30 p-4 absolute top-6 right-6"
-          >
-            <Close />
-          </button>
-          <Hearts />
-          <p className="text-2xl font-bold text-grey-50 text-center">
-            Thank you for your suggestion
-          </p>
-          <p className="text-base text-grey-400 text-center">
-            Your suggestion has been succesfully added to my watchlist, I will
-            manage sometime to watch your suggestion. ❤
-          </p>
-        </motion.div>
-      </motion.div>
+      <Modal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };
