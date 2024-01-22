@@ -26,6 +26,7 @@
       "@/libs/dto/*": ["./src/libs/dto/*"],
       "@/libs/enums/*": ["./src/libs/enums/*"],
       "@/utils/*": ["./src/utils/*"],
+      "@/hooks/*": ["./src/hooks/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
