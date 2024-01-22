@@ -40,7 +40,7 @@ export default async function Home() {
         <h2 className="text-grey-400 font-semibold text-[32px]">
           All <span className="text-base">{movies ? movies.length : "0"}</span>
         </h2>
-        <div className="grid grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 gap-6 mt-6">
+        <div className="grid grid-cols-2 min-[500px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 mt-6">
           {movies.map((movie, index) => (
             <MotionDiv
               key={movie?.show?.id}

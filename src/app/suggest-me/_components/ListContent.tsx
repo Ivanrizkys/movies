@@ -101,7 +101,7 @@ const ListContent = () => {
 
       <div className="mt-[88px]">
         {!isLoading || !isValidating ? (
-          <div className="grid grid-cols-2 min-[500px]:grid-cols-3 sm:grid-cols-4 gap-6 mt-6">
+          <div className="grid grid-cols-2 min-[500px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 mt-6">
             {data &&
               data.map((movie, index) => (
                 <motion.div
