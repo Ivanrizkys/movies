@@ -1,10 +1,10 @@
 "use client";
 
 import Arrow from "@/icons/Arrow";
-import Container from "./Container";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Container from "../Container";
 
 const Navbar = () => {
   const pathname = usePathname();
