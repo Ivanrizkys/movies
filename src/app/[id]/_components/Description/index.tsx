@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Star from "@/icons/Star";
+import { MotionDiv } from "@/components/Framer";
+import { descriptionVariants } from "./animate";
 
 interface DescriptionProps {
   title: string;
@@ -16,8 +18,13 @@ const Description = (props: DescriptionProps) => {
     props;
 
   return (
-    <div className="lg:mx-12 xl:mx-20 -mt-[72px]">
-      <div className="w-9/12 sm:w-full sm:max-w-[560px] p-7 sm:p-10 rounded-3xl bg-[rgb(32,40,62)]/70 backdrop-blur-lg mx-auto lg:mx-0">
+    <MotionDiv
+      variants={descriptionVariants}
+      initial="offScreen"
+      whileInView="onScreen"
+      className="lg:mx-12 xl:mx-20 -mt-[72px]"
+    >
+      <div className="w-9/12 sm:w-full sm:max-w-[560px] p-7 sm:p-10 rounded-3xl bg-[rgb(32,40,62)]/70 backdrop-blur-lg transform-gpu mx-auto lg:mx-0">
         <div className="text-primary-200 text-[10px] sm:text-xs flex items-center gap-x-2 justify-center lg:justify-start">
           <p>MaileHereko</p>
           <p>/</p>
@@ -61,7 +68,7 @@ const Description = (props: DescriptionProps) => {
           </p>
         </div>
       </div>
-    </div>
+    </MotionDiv>
   );
 };
 
