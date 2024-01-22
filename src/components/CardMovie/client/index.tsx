@@ -47,8 +47,12 @@ const CardMovie = (props: CardMovieProps) => {
         className="flex items-center gap-x-1 min-[500px]:gap-x-2 mt-4"
       >
         <Thumb />
-        <p className="text-base font-semibold text-primary-400 block min-[500px]:hidden">Suggest</p>
-        <p className="text-base font-semibold text-primary-400 hidden min-[500px]:block">Suggest this</p>
+        <p className="text-base font-semibold text-primary-400 block min-[500px]:hidden">
+          Suggest
+        </p>
+        <p className="text-base font-semibold text-primary-400 hidden min-[500px]:block">
+          Suggest this
+        </p>
       </button>
     </motion.div>
   );
