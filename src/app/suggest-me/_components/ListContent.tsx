@@ -31,7 +31,7 @@ const ListContent = () => {
             name="search"
             autoComplete="off"
             placeholder="Search Movies or TV Shows"
-            className="text-base border-1 border-solid border-grey-700 rounded-xl bg-black/10 placeholder:text-sm placeholder:text-grey-600 text-grey-400 outline-none p-3 pl-14 pr-4"
+            className="w-full text-base border-1 border-solid border-grey-700 rounded-xl bg-black/10 placeholder:text-sm placeholder:text-grey-600 text-grey-400 outline-none p-3 pl-14 pr-4"
           />
           <div className="absolute left-4 top-2/4 z-10 -translate-y-2/4">
             <Search />
